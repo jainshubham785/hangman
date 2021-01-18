@@ -1,0 +1,15 @@
+body {
+    background-color: teal;
+}
+h1 {
+    text-align: center;
+}
+.word-input {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    padding: 2x;
+    padding-bottom: 0px;
+    border-bottom: 2px solid black;
+}
