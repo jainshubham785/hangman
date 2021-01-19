@@ -1,57 +1,69 @@
-const words = ['application', 'programming', 'interface', 'wizard', 'frizar'];
+const words = ['application', 'programming', 'interface', 'wizard', 'frizar', 'cat', 'on'];
+const right_letter = document.getElementById("right");
+const wrong_letter = document.getElementById("wrong-letter");
+let correct = 0;
+let wrong = 0;
+let visited = [];
+let i = 0;
 
-var correct = 0;
-var wrong = 0;
-var visited = [];
-var word = words[0];
-
-for (var i = 0; i < word.length; i++) {
-    var node = document.createElement("div");
-    node.setAttribute("class", "word-input");
-    document.body.appendChild(node);
+function init(j) {
+    for (let i = 0; i < words[j].length; i++) {
+        let node = document.createElement("button");
+        node.setAttribute("class", "word-input");
+        right_letter.appendChild(node);
+    }
 }
 
+init(i);
+
+function restart() {
+    wrong_letter.textContent = "";
+    right_letter.innerHTML = "";
+    i++;
+    if (i == 7) i = 0;
+    correct = 0;
+    wrong = 0;
+    visited.length = 0;
+    for (let i = 0; i < 6; i++) {
+        document.querySelectorAll(".body-parts")[i].setAttribute("visibility", "hidden");
+    }
+    init(i);
+}
 
 window.addEventListener("keydown", function (event) {
 
     if (event.keyCode >= 65 && event.keyCode <= 90) {
 
-        var index = -1;
+        let index = -1;
 
-        for (var i = 0; i < word.length; i++) {
-            if (word.charAt(i) == event.key && visited[i] != true) {
-                index = i;
+        for (let k = 0; k < words[i].length; k++) {
+            if (words[i].charAt(k) == event.key && visited[k] != true) {
+                index = k;
                 visited[index] = true;
                 break;
             }
         }
 
         if (index != -1) {
-            document.querySelectorAll(".word-input")[index].textContent = event.key;
-            // visited[index] = true;
+            document.querySelectorAll(".word-input")[index].textContent = event.key.toUpperCase();
             correct++;
             setTimeout(() => {
-                if (correct == word.length) {
+                if (correct == words[i].length) {
                     alert("win");
-                    location.reload();
+                    restart();
                 }
-            }, 100);
+            }, 0);
 
         } else {
-            var text = document.getElementById("wrong-letter");
-            text.textContent = text.textContent + event.key + " ";
+            wrong_letter.textContent = wrong_letter.textContent + event.key.toUpperCase() + " ";
             wrong++;
-            if (wrong == 1) document.getElementById("mouth").setAttribute("visibility", "");
-            if (wrong == 2) document.getElementById("body").setAttribute("visibility", "");
-            if (wrong == 3) document.getElementById("left-hand").setAttribute("visibility", "");
-            if (wrong == 4) document.getElementById("right-hand").setAttribute("visibility", "");
-            if (wrong == 5) document.getElementById("left-leg").setAttribute("visibility", "");
-            if (wrong == 6) document.getElementById("right-leg").setAttribute("visibility", "");
 
+            document.querySelectorAll(".body-parts")[wrong - 1].setAttribute("visibility", "");
+         
             setTimeout(() => {
                 if (wrong == 6) {
                     alert("lose");
-                    location.reload();
+                    restart();
                 }
             }, 0);
         }

@@ -1,15 +1,49 @@
 body {
     background-color: teal;
 }
-h1 {
+
+.grid-container {
+    display: grid;
+    margin: auto;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 10px;
+    
+}
+
+#title {
+    text-align: center;
+    font-size: 70px;
+    color: rgb(6, 41, 94);
+    margin: 10px auto 10px auto;
+}
+
+.div2 {
+    padding: 30px;
+    border: 2px dotted red;
+}
+
+.div3 {
+    padding: 20px;
+}
+
+
+
+#hangman {
     text-align: center;
 }
+
+
 .word-input {
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
-    padding: 2x;
-    padding-bottom: 0px;
-    border-bottom: 2px solid black;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    font-weight: bold; 
+}
+
+#wrong-letter {
+    color: red;
+}
+
+.word-input {
+    color: green;
 }
